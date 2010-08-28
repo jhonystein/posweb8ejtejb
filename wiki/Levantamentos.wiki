@@ -1,0 +1,53 @@
+#labels levantamentos,tabelas
+=================
+TABELA
+=================
+Produto
+- Id
+- Descrição
+- Pontos
+
+Cliente
+- Id
+- Nome
+- CPF (Usar o CPF para login)
+- Senha
+- [Não ter. Fazer um SUM] SaldoPontos
+
+Loja
+- Id
+- RazaSocial
+- Login
+- Senha
+
+Movimentacao
+- Id
+- Data
+- Loja
+- ProdutoTroca
+- Cliente
+- Pontos
+- Tipo: Entrada/Saida
+- Historico
+
+Produto (Para trocar os pontos)
+- Id
+- Descricao
+- Valor em pontos
+
+=================
+Metodos
+=================
+
+Loja
+	- Efetua Login da loja
+	- Verifica se existe o CPF do cliente: Retornar erro senão
+	- Inclui a quantidade de pontos (informado pela loja) para o CPF.
+	
+Cliente
+	- Efetua login (CPF e Senha)
+	- Extrato
+		- Tira extrato dos pontos
+	- Trocar os pontos
+		- Lista os produtos para troca de ponto
+		- Seleciona os produtos para troca
