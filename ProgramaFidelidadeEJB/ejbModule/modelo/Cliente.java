@@ -1,5 +1,10 @@
 package modelo;
 
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+
+@NamedQuery(name="usuarioExiste", query="select count(c) from Cliente as c where c.cpf = ?1 ")
 public class Cliente extends Entidade{
 
 	private static final long serialVersionUID = 1L;
