@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="movimentacoes")
@@ -13,6 +15,7 @@ public class Movimentacao extends Entidade{
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="dt_data", nullable=false)
+	@Temporal(TemporalType.DATE)
 	private Date data;
 	
 	@Column(name="loja")
