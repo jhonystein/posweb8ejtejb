@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="clientes")
-@NamedQuery(name="usuarioExiste", query="select count(c) from Cliente as c where c.cpf = ?1 ")
+@NamedQuery(name="usuarioPorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
 public class Cliente extends Entidade{
 
 	private static final long serialVersionUID = 1L;
