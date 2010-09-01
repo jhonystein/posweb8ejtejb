@@ -2,15 +2,35 @@ package modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="movimentacoes")
 public class Movimentacao extends Entidade{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name="dt_data", nullable=false)
 	private Date data;
+	
+	@Column(name="loja")
 	private Loja loja;
+	
+	@Column(name="produto")
 	private Produto produto;
+	
+	@Column(name="cliente")
 	private Cliente cliente;
+	
+	@Column(name="nr_pontos", nullable=false)
 	private int ponto;
+	
+	@Column(name="ds_tipo")
 	private String tipo;
+	
+	@Column(name="dt_historico")
 	private String historico;
 	
 	public Date getData() {
