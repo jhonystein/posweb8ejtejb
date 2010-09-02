@@ -3,9 +3,11 @@ package modelo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name="produtos")
+@XmlType
 public class Produto extends Entidade{
 	
 	private static final long serialVersionUID = 1L;
