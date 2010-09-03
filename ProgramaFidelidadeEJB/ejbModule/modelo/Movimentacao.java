@@ -2,8 +2,11 @@ package modelo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,13 +21,16 @@ public class Movimentacao extends Entidade{
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
-	@Column(name="loja")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cd_loja")	
 	private Loja loja;
 	
-	@Column(name="produto")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cd_produto")
 	private Produto produto;
 	
-	@Column(name="cliente")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cd_cliente")
 	private Cliente cliente;
 	
 	@Column(name="nr_pontos", nullable=false)
