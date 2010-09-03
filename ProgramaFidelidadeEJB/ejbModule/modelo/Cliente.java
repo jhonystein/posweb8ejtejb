@@ -2,12 +2,16 @@ package modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="clientes")
-@NamedQuery(name="usuarioPorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
+@NamedQueries({
+@NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 "),
+@NamedQuery(name="loginCliente", query="select c from Cliente as c where c.cpf = ?1 and c.senha = ?2 ")
+})
 public class Cliente extends Entidade{
 
 	private static final long serialVersionUID = 1L;

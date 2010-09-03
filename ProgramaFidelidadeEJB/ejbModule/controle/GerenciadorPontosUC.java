@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import modelo.Cliente;
 import modelo.Loja;
 import modelo.Movimentacao;
+import modelo.TipoMovimentacao;
 import remote.GerenciadorPontosRemote;
 
 @Stateful
@@ -25,7 +26,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 	
 	@Override
 	public boolean existeUsuario(String cpf) {
-		Query q = em.createNamedQuery("usuarioPorCPF");
+		Query q = em.createNamedQuery("clientePorCPF");
 		q.setParameter(1, cpf);
 		cliente = (Cliente) q.getSingleResult();
 		if(cliente != null)
@@ -49,7 +50,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		movimentacao.setData(new Date());
 		movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
 		movimentacao.setPonto(pontos);
-//		movimentacao.setTipo(tipo) falta preencher
+		movimentacao.setTipo(TipoMovimentacao.entrada.getDescricao());
 		em.persist(movimentacao);
 		em.flush();
 	}
