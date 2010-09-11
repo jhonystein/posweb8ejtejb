@@ -1,8 +1,11 @@
 package controle;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -13,6 +16,7 @@ import javax.persistence.Query;
 
 import modelo.Cliente;
 import modelo.Movimentacao;
+import modelo.TipoMovimentacao;
 
 @WebService
 @Stateless
@@ -31,11 +35,13 @@ public class ExtratoPontosUC{
 		Cliente cliente = (Cliente) q.getSingleResult();
 		if(cliente != null){
 			if(controleCliente.getUsuarioLogado(cliente.getCodigo()))
-				throw new Exception();
-			else
+				throw new Exception();//usuario ja logado
+			else{//adiciona o cliente a lista
+				controleCliente.addCliente(cliente.getCodigo());
 				return cliente.getCodigo();
+			}
 		}else
-			throw new Exception();
+			throw new Exception();//usuario inexistente
 	}
 
 	@WebMethod
@@ -53,7 +59,28 @@ public class ExtratoPontosUC{
 	@WebMethod
 	public void logout(@WebParam(name="codigoCliente") int codigoCliente) throws Exception {
 		if(!controleCliente.removerCliente(codigoCliente))
-			throw new Exception();
+			throw new Exception();//usuario nao esta logado
+	}
+	
+	@Schedule(dayOfMonth="10", hour="11")
+	public void descontarPontosMes(){
+		Calendar data = Calendar.getInstance();
+		data.add(Calendar.MONTH, -2);
+		Query q = em.createNamedQuery("clienteUltimaTroca");
+		q.setParameter(1, data.getTime());
+		
+		List<Cliente> listaClientes = q.getResultList();
+		for(Cliente c: listaClientes){
+			Movimentacao movimentacao = new Movimentacao();
+			movimentacao.setCliente(c);
+			movimentacao.setData(new Date());
+			movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
+			movimentacao.setPonto(pontos);
+			movimentacao.setTipo(TipoMovimentacao.saida.getDescricao());
+			em.persist(movimentacao);
+			em.flush();
+		}
+		
 	}
 
 }

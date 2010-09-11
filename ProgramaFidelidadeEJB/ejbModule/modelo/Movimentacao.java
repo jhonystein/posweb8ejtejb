@@ -39,7 +39,7 @@ public class Movimentacao extends Entidade{
 	@Column(name="ds_tipo")
 	private String tipo;
 	
-	@Column(name="dt_historico")
+	@Column(name="ds_historico")
 	private String historico;
 	
 	public Date getData() {

@@ -22,13 +22,12 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 	@PersistenceContext
 	private EntityManager em;
 	private Loja loja;
-	private Cliente cliente;
 	
 	@Override
 	public boolean existeUsuario(String cpf) {
 		Query q = em.createNamedQuery("clientePorCPF");
 		q.setParameter(1, cpf);
-		cliente = (Cliente) q.getSingleResult();
+		Cliente cliente = (Cliente) q.getSingleResult();
 		if(cliente != null)
 			return true;
 		else
@@ -40,12 +39,15 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		Query q = em.createNamedQuery("carregarLoja");
 		q.setParameter(1, nick);
 		q.setParameter(1, senha);
-		loja = (Loja) q.getSingleResult();
-		//FALTA ADICIONAR ESTA LOJA A UMA CLASSE SINGLETON 
+		loja = (Loja) q.getSingleResult(); 
 	}
 
 	@Override
 	public void acumular(String cpf, int pontos) {
+		Query q = em.createNamedQuery("clientePorCPF");
+		q.setParameter(1, cpf);
+		Cliente cliente = (Cliente) q.getSingleResult();
+		movimentacao.setCliente(cliente);
 		movimentacao.setLoja(loja);
 		movimentacao.setData(new Date());
 		movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde

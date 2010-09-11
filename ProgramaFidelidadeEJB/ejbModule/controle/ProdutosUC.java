@@ -19,7 +19,7 @@ public class ProdutosUC{
 
 	@WebMethod
 	public List<Produto> listar() {
-		return em.createQuery("from " + Produto.class.getName()).getResultList();
+		return em.createQuery("select p from Produto p ").getResultList();
 	}
 
 }

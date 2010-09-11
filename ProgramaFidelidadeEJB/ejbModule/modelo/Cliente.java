@@ -10,7 +10,8 @@ import javax.persistence.Table;
 @Table(name="clientes")
 @NamedQueries({
 @NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 "),
-@NamedQuery(name="loginCliente", query="select c from Cliente as c where c.cpf = ?1 and c.senha = ?2 ")
+@NamedQuery(name="loginCliente", query="select c from Cliente as c where c.cpf = ?1 and c.senha = ?2 "), 
+@NamedQuery(name="clienteUltimaTroca", query="select c from Cliente as c where c.codigo not in (select m.cliente.codigo from Movimentacao m where m.data >= ?1) group by c.codigo"),
 })
 public class Cliente extends Entidade{
 
