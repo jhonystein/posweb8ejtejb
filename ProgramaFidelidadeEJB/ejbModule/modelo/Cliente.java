@@ -1,7 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
@@ -17,9 +22,14 @@ import javax.persistence.Table;
 //@NamedQuery(name="clienteUltimaTroca", query="select c, ((select sum(m.ponto) from Movimentacao m where m.cliente.codigo = c.codigo and tipo = 'Entrada') - (select sum(m.ponto) from Movimentacao m where m.cliente.codigo = c.codigo and tipo = 'Saída')) saldo from Cliente as c where c.codigo not in (select m.cliente.codigo from Movimentacao m where m.tipo = TipoMovimentacao.SAIDA and max(m.data) >= ?1 group by m.cliente.codigo) group by c.codigo"),
 //@NamedQuery(name="clienteSaldoPontos", query="select c, sum(case m.tipo when TipoMovimentacao.ENTRADA then m.ponto * -1 else m.ponto end) from Movimentacao m left outer join Cliente c where c.codigo not in (select m.cliente.codigo from Movimentacao m where m.tipo = TipoMovimentacao.SAIDA and max(m.data) >= ?1 group by m.cliente.codigo) group by c"),
 })
-public class Cliente extends Entidade{
-
+public class Cliente implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cliente")
+	private int codigo;
 	
 	@Column(name="ds_cliente")
 	private String nome;
@@ -30,6 +40,13 @@ public class Cliente extends Entidade{
 	@Column(name="ds_senha")
 	private String senha;
 	
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public int getCodigo() {
+		return codigo;
+	}
+		
 	public String getNome() {
 		return nome;
 	}

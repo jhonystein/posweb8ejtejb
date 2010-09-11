@@ -45,9 +45,12 @@ public class ExtratoPontosUC{
 	}
 
 	@WebMethod
-	public List<Movimentacao> extratoPontos(@WebParam(name="codigoCliente") int codigoCliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Movimentacao> extratoPontos(@WebParam(name="codigoCliente") int codigoCliente) throws Exception {
+		if(!controleCliente.getUsuarioLogado(codigoCliente))
+			throw new Exception();
+		Query q = em.createNamedQuery("movimentacaoCliente");
+		q.setParameter(1, codigoCliente);
+		return q.getResultList();
 	}
 
 	@WebMethod

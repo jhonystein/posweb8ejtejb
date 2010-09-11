@@ -1,7 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
@@ -11,9 +16,14 @@ import javax.persistence.Table;
 @Table(name="lojas")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @NamedQuery(name="carregarLoja", query="select l from Loja as l where l.nick = ?1 and l.senha = ?2 ")
-public class Loja extends Entidade{
-
+public class Loja implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_loja")
+	private int codigo;
 	
 	@Column(name="ds_razaoSocial", nullable=false)
 	private String razaoSocial;
@@ -23,6 +33,13 @@ public class Loja extends Entidade{
 	
 	@Column(name="ds_senha", nullable=false)
 	private String senha;
+	
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public int getCodigo() {
+		return codigo;
+	}
 	
 	public String getRazaoSocial() {
 		return razaoSocial;
