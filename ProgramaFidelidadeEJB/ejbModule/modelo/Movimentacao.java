@@ -9,6 +9,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,6 +17,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="movimentacoes")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+//@NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
 public class Movimentacao extends Entidade{
 
 	private static final long serialVersionUID = 1L;
