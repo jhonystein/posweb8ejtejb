@@ -5,11 +5,11 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,7 +42,8 @@ public class Movimentacao extends Entidade{
 	private int ponto;
 	
 	@Column(name="ds_tipo")
-	private String tipo;
+	@Enumerated
+	private TipoMovimentacao tipo;
 	
 	@Column(name="ds_historico")
 	private String historico;
@@ -77,10 +78,10 @@ public class Movimentacao extends Entidade{
 	public void setPonto(int ponto) {
 		this.ponto = ponto;
 	}
-	public String getTipo() {
+	public TipoMovimentacao getTipo() {
 		return tipo;
 	}
-	public void setTipo(String tipo) {
+	public void setTipo(TipoMovimentacao tipo) {
 		this.tipo = tipo;
 	}
 	public String getHistorico() {

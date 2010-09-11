@@ -81,7 +81,7 @@ public class ExtratoPontosUC{
 				movimentacao.setData(new Date());
 				movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
 				movimentacao.setPonto(totalDescontar);
-				movimentacao.setTipo(TipoMovimentacao.saida.getDescricao());
+				movimentacao.setTipo(TipoMovimentacao.SAIDA);
 				em.persist(movimentacao);
 				em.flush();
 			}

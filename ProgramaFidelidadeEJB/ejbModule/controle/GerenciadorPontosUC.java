@@ -52,7 +52,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		movimentacao.setData(new Date());
 		movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
 		movimentacao.setPonto(pontos);
-		movimentacao.setTipo(TipoMovimentacao.entrada.getDescricao());
+		movimentacao.setTipo(TipoMovimentacao.ENTRADA);
 		em.persist(movimentacao);
 		em.flush();
 	}
