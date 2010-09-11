@@ -2,12 +2,15 @@ package modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="clientes")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @NamedQueries({
 @NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 "),
 @NamedQuery(name="loginCliente", query="select c from Cliente as c where c.cpf = ?1 and c.senha = ?2 "), 

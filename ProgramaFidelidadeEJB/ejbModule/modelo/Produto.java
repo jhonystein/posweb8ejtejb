@@ -2,11 +2,14 @@ package modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name="produtos")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @XmlType
 public class Produto extends Entidade{
 	

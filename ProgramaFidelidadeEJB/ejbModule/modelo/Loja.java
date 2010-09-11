@@ -2,11 +2,14 @@ package modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="lojas")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @NamedQuery(name="carregarLoja", query="select l from Loja as l where l.nick = ?1 and l.senha = ?2 ")
 public class Loja extends Entidade{
 
