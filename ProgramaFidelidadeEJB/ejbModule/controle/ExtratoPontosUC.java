@@ -69,16 +69,22 @@ public class ExtratoPontosUC{
 		Query q = em.createNamedQuery("clienteUltimaTroca");
 		q.setParameter(1, data.getTime());
 		
-		List<Cliente> listaClientes = q.getResultList();
-		for(Cliente c: listaClientes){
-			Movimentacao movimentacao = new Movimentacao();
-			movimentacao.setCliente(c);
-			movimentacao.setData(new Date());
-			movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
-			movimentacao.setPonto(pontos);
-			movimentacao.setTipo(TipoMovimentacao.saida.getDescricao());
-			em.persist(movimentacao);
-			em.flush();
+		List<Object[]> listaObjetos = q.getResultList();
+		for(Object[] o: listaObjetos){
+			int saldoPonto = (Integer)o[1];
+			int totalDescontar = 100;
+			if(saldoPonto < 100)
+				totalDescontar = saldoPonto;
+			if(totalDescontar > 0){
+				Movimentacao movimentacao = new Movimentacao();
+				movimentacao.setCliente((Cliente)o[0]);
+				movimentacao.setData(new Date());
+				movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
+				movimentacao.setPonto(totalDescontar);
+				movimentacao.setTipo(TipoMovimentacao.saida.getDescricao());
+				em.persist(movimentacao);
+				em.flush();
+			}
 		}
 		
 	}
