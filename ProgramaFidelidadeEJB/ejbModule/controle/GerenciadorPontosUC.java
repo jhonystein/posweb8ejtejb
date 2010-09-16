@@ -19,8 +19,11 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 
 	@EJB
 	private Movimentacao movimentacao;
+	
 	@PersistenceContext
 	private EntityManager em;
+	
+	@EJB
 	private Loja loja;
 	
 	@Override

@@ -1,11 +1,15 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -18,9 +22,14 @@ import javax.persistence.TemporalType;
 @Table(name="movimentacoes")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 //@NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
-public class Movimentacao extends Entidade{
+public class Movimentacao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_movimentacao")
+	private int codigo;
 	
 	@Column(name="dt_data", nullable=false)
 	@Temporal(TemporalType.DATE)
@@ -48,6 +57,12 @@ public class Movimentacao extends Entidade{
 	@Column(name="ds_historico")
 	private String historico;
 	
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 	public Date getData() {
 		return data;
 	}
