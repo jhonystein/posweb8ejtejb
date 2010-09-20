@@ -7,7 +7,6 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import modelo.Cliente;
 import modelo.Loja;
 import modelo.Movimentacao;
@@ -30,11 +29,11 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 	public boolean existeUsuario(String cpf) {
 		Query q = em.createNamedQuery("clientePorCPF");
 		q.setParameter(1, cpf);
-		Cliente cliente = (Cliente) q.getSingleResult();
-		if(cliente != null)
-			return true;
-		else
+		
+		if (q.getResultList().isEmpty())
 			return false;
+		else
+			return true;
 	}
 
 	@Override
@@ -47,6 +46,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 
 	@Override
 	public void acumular(String cpf, int pontos) {
+		
 		Query q = em.createNamedQuery("clientePorCPF");
 		q.setParameter(1, cpf);
 		Cliente cliente = (Cliente) q.getSingleResult();
@@ -58,6 +58,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		movimentacao.setTipo(TipoMovimentacao.ENTRADA);
 		em.persist(movimentacao);
 		em.flush();
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 
+import javax.ejb.Stateful;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Table(name="lojas")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @NamedQuery(name="carregarLoja", query="select l from Loja as l where l.nick = ?1 and l.senha = ?2 ")
+@Stateful
 public class Loja implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
