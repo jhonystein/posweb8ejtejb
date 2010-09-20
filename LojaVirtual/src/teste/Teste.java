@@ -13,7 +13,7 @@ public class Teste {
 
 	        GerenciadorPontosRemote Gerenciador = (GerenciadorPontosRemote) ctx.lookup("java:global/TrabalhoFinal/ProgramaFidelidadeEJB/GerenciadorPontosUC");
 	        
-	        //System.out.println(Gerenciador.existeUsuario("060.747.709-13"));
-	        
+	        System.out.println(Gerenciador.existeUsuario("6"));
+	        System.out.println("Gol!");
 	    }
 }
