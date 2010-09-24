@@ -40,7 +40,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 	public void login(String nick, String senha) {
 		Query q = em.createNamedQuery("carregarLoja");
 		q.setParameter(1, nick);
-		q.setParameter(1, senha);
+		q.setParameter(2, senha);
 		loja = (Loja) q.getSingleResult(); 
 	}
 
