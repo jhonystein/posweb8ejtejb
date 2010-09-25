@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -34,11 +35,15 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 	}
 
 	@Override
-	public void login(String nick, String senha) {
+	public void login(String nick, String senha) throws Exception {
 		Query q = em.createNamedQuery("carregarLoja");
 		q.setParameter(1, nick);
 		q.setParameter(2, senha);
-		loja = (Loja) q.getSingleResult(); 
+		List<Loja> lstLojas = q.getResultList();
+		if(lstLojas.size() > 0)
+			loja = (Loja) lstLojas.get(0); 
+		if(loja == null)
+			throw new Exception("Loja inválido!");
 	}
 
 	@Override
@@ -47,13 +52,14 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		Query q = em.createNamedQuery("clientePorCPF");
 		q.setParameter(1, cpf);
 		Cliente cliente = (Cliente) q.getSingleResult();
+		movimentacao = new Movimentacao();
 		movimentacao.setCliente(cliente);
 		movimentacao.setLoja(loja);
 		movimentacao.setData(new Date());
 		movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
 		movimentacao.setPonto(pontos);
 		movimentacao.setTipo(TipoMovimentacao.ENTRADA);
-		em.persist(movimentacao);
+		em.merge(movimentacao);
 		em.flush();
 		
 	}
