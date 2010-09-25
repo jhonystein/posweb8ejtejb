@@ -8,7 +8,7 @@ import javax.naming.NamingException;
 import remote.GerenciadorPontosRemote;
 
 @SessionScoped
-@ManagedBean(name="AdicionarPontosUC")
+@ManagedBean
 public class AdicionarPontosUC {
 
 	private String cpf;
