@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="clientes")
 @NamedQueries({
 @NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 "),
 @NamedQuery(name="loginCliente", query="select c from Cliente as c where c.cpf = ?1 and c.senha = ?2 "),
-@NamedQuery(name="clienteUltimaTroca", query="select c, ((select sum(m.ponto) from Movimentacao m where m.cliente.codigo = c.codigo and tipo = TipoMovimentacao.ENTRADA) - (select sum(m.ponto) from Movimentacao m where m.cliente.codigo = c.codigo and tipo = TipoMovimentacao.SAIDA)) saldo from Cliente as c where c.codigo not in (select m.cliente.codigo from Movimentacao m where m.tipo = TipoMovimentacao.SAIDA and max(m.data) >= ?1 group by m.cliente.codigo) group by c.codigo")
-//@NamedQuery(name="clienteSaldoPontos", query="select c, sum(case m.tipo when TipoMovimentacao.ENTRADA then m.ponto * -1 else m.ponto end) from Movimentacao m left outer join Cliente c where c.codigo not in (select m.cliente.codigo from Movimentacao m where m.tipo = TipoMovimentacao.SAIDA and max(m.data) >= ?1 group by m.cliente.codigo) group by c"),
+@NamedQuery(name="clienteUltimaTroca", query="select c from Cliente c where c.ultimaSaida <= ?1")
 })
 public class Cliente implements Serializable{
 	
@@ -37,6 +39,25 @@ public class Cliente implements Serializable{
 	@Column(name="ds_senha")
 	private String senha;
 	
+	@Temporal(TemporalType.DATE)
+	@Column(name="dt_ultimasaida")
+	private Date ultimaSaida;
+	
+	@Column(name="vl_saldo")
+	private int saldo;
+	
+	public Date getUltimaSaida() {
+		return ultimaSaida;
+	}
+	public void setUltimaSaida(Date ultimaSaida) {
+		this.ultimaSaida = ultimaSaida;
+	}
+	public int getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(int saldo) {
+		this.saldo = saldo;
+	}
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}

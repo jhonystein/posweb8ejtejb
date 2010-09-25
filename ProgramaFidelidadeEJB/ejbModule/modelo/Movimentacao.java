@@ -19,8 +19,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="movimentacoes")
-@NamedQuery(name="movimentacaoCliente", query="select m from Movimentacao as m where m.cliente.codigo = ?1 ")
-//@NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
+@NamedQuery(name="movimentacaoCliente", query="select m from Movimentacao m where m.cliente.codigo = ?1 ")
 public class Movimentacao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
