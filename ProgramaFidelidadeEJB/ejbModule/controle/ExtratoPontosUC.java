@@ -65,7 +65,7 @@ public class ExtratoPontosUC{
 			throw new Exception("Usuario nao esta logado");
 	}
 	
-	@Schedule(dayOfMonth="10", hour="11")
+	@Schedule(dayOfMonth="25", hour="15", minute="09", second="0")
 	public void descontarPontosMes(){
 		Calendar data = Calendar.getInstance();
 		data.add(Calendar.MONTH, -2);
