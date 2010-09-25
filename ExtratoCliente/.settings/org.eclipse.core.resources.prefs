@@ -1,0 +1,16 @@
+#Sat Sep 25 15:04:48 GMT-03:00 2010
+eclipse.preferences.version=1
+encoding//src/controle/Cliente.java=UTF-8
+encoding//src/controle/Exception.java=UTF-8
+encoding//src/controle/ExtratoPontosUC.java=UTF-8
+encoding//src/controle/ExtratoPontosUCPortBindingStub.java=UTF-8
+encoding//src/controle/ExtratoPontosUCService.java=UTF-8
+encoding//src/controle/ExtratoPontosUCServiceLocator.java=UTF-8
+encoding//src/controle/Loja.java=UTF-8
+encoding//src/controle/Movimentacao.java=UTF-8
+encoding//src/controle/Produto.java=UTF-8
+encoding//src/controle/ProdutosUC.java=UTF-8
+encoding//src/controle/ProdutosUCPortBindingStub.java=UTF-8
+encoding//src/controle/ProdutosUCService.java=UTF-8
+encoding//src/controle/ProdutosUCServiceLocator.java=UTF-8
+encoding//src/controle/TipoMovimentacao.java=UTF-8
