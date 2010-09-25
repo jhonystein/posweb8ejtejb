@@ -3,7 +3,6 @@ package modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.ejb.Stateful;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +21,6 @@ import javax.persistence.TemporalType;
 @Table(name="movimentacoes")
 @NamedQuery(name="movimentacaoCliente", query="select m from Movimentacao as m where m.cliente.codigo = ?1 ")
 //@NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
-@Stateful
 public class Movimentacao implements Serializable{
 
 	private static final long serialVersionUID = 1L;

@@ -3,7 +3,6 @@
 	<name>TrabalhoFinal</name>
 	<comment></comment>
 	<projects>
-		<project>ProgramaFidelidadeEJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
