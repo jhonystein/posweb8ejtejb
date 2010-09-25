@@ -4,7 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-
+import javax.naming.NamingException;
 import remote.GerenciadorPontosRemote;
 
 @SessionScoped
@@ -13,8 +13,12 @@ public class AdicionarPontosUC {
 
 	private String cpf;
 	private int pontos;
+	private GerenciadorPontosRemote gerenciador = null;
 	
-	public AdicionarPontosUC() {}
+	public AdicionarPontosUC() throws NamingException {
+		Context ctx = new InitialContext();
+        gerenciador = (GerenciadorPontosRemote) ctx.lookup("java:global/TrabalhoFinal/ProgramaFidelidadeEJB/GerenciadorPontosUC");
+	}
 	
 	public String getCpf() {
 		return cpf;
@@ -32,11 +36,7 @@ public class AdicionarPontosUC {
     public String salvar() throws Exception{
     	
     	try {
-	        
-    		Context ctx = new InitialContext();
-	        GerenciadorPontosRemote gerenciador = (GerenciadorPontosRemote) ctx.lookup("java:global/TrabalhoFinal/ProgramaFidelidadeEJB/GerenciadorPontosUC");
 	        gerenciador.acumular(cpf, pontos);
-	        
 	        return "formAdicionarPontos";
 	        
 		} finally {

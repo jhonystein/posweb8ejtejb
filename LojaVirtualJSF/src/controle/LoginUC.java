@@ -9,7 +9,7 @@ import javax.naming.NamingException;
 import remote.GerenciadorPontosRemote;
 
 @SessionScoped
-@ManagedBean(name="AdicionarPontosUC")
+@ManagedBean(name="LoginUC")
 public class LoginUC {
 	
 	private String nick;
