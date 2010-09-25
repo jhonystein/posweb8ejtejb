@@ -73,7 +73,7 @@ public class AdicionarPontosUC {
 			return "formAdicionarPontos";
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage("login",
-					new FacesMessage("Login inválido!"));
+					new FacesMessage(e.getMessage()));
 		}
 		return null;
 	}
