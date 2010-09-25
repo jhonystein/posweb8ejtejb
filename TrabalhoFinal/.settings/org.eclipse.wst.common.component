@@ -2,5 +2,13 @@
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="TrabalhoFinal">
         <wb-resource deploy-path="/" source-path="/EarContent"/>
+        <dependent-module archiveName="ProgramaFidelidadeEJB.jar" deploy-path="/" handle="module:/resource/ProgramaFidelidadeEJB/ProgramaFidelidadeEJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="LojaVirtualJSF.war" deploy-path="/" handle="module:/resource/LojaVirtualJSF/LojaVirtualJSF">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

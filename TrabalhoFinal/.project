@@ -3,6 +3,8 @@
 	<name>TrabalhoFinal</name>
 	<comment></comment>
 	<projects>
+		<project>ProgramaFidelidadeEJB</project>
+		<project>LojaVirtualJSF</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
