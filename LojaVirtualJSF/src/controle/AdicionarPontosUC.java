@@ -14,7 +14,7 @@ import remote.GerenciadorPontosRemote;
 @ManagedBean(name = "adicionarPontosUC")
 public class AdicionarPontosUC {
 
-	private List<Integer> produtos;
+	private List<String> produtos;
 	private String cpf;
 	private GerenciadorPontosRemote gerenciador = null;
 
@@ -24,11 +24,11 @@ public class AdicionarPontosUC {
 				.lookup("java:global/TrabalhoFinal/ProgramaFidelidadeEJB/GerenciadorPontosUC");
 	}
 
-	public List<Integer> getProdutos() {
+	public List<String> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<Integer> produtos) {
+	public void setProdutos(List<String> produtos) {
 		this.produtos = produtos;
 	}
 
@@ -44,13 +44,18 @@ public class AdicionarPontosUC {
 
 		Integer pontos = 0;
 
-		for (Integer ponto : produtos) {
-			pontos += ponto;
+		for (String ponto : produtos) {
+			pontos += Integer.parseInt(ponto);
 		}
 
 		if (pontos > 0) {
-			gerenciador.acumular(cpf, pontos);
-			return "formAdicionarPontos";
+			;
+			if (gerenciador.existeUsuario(cpf)) {
+				gerenciador.login("big", "big");
+				gerenciador.acumular(cpf, pontos);
+				return "formAdicionarPontos";
+				
+			} else { return null; }
 		}
 		return null;
 
