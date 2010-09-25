@@ -53,9 +53,9 @@ public class AdicionarPontosUC {
 		}
 
 		if (pontos > 0) {
-
 			if (gerenciador.existeUsuario(cpf)) {
 				gerenciador.acumular(cpf, pontos);
+				iniciarDados();
 				return "formAdicionarPontos";
 
 			} else {
@@ -65,6 +65,11 @@ public class AdicionarPontosUC {
 		}
 		return null;
 
+	}
+	
+	private void iniciarDados(){
+		cpf = null;
+		produtos.clear();
 	}
 	
 	public String logar(){
@@ -79,6 +84,7 @@ public class AdicionarPontosUC {
 	}
 
 	public String cancelar() {
+		iniciarDados();
 		return "formAdicionarPontos";
 	}
 

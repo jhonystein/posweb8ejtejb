@@ -83,7 +83,7 @@ public class ExtratoPontosUC{
 				Movimentacao movimentacao = new Movimentacao();
 				movimentacao.setCliente((Cliente)o[0]);
 				movimentacao.setData(new Date());
-				movimentacao.setHistorico("Acrescentar o texto para historico mais tarde");
+				movimentacao.setHistorico("Desconto da pontuacao(Mais de 2 meses sem movimentacao)");
 				movimentacao.setPonto(totalDescontar);
 				movimentacao.setTipo(TipoMovimentacao.SAIDA);
 				em.persist(movimentacao);

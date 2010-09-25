@@ -56,7 +56,7 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		movimentacao.setCliente(cliente);
 		movimentacao.setLoja(loja);
 		movimentacao.setData(new Date());
-		movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
+		movimentacao.setHistorico("Compra de produto(s)");
 		movimentacao.setPonto(pontos);
 		movimentacao.setTipo(TipoMovimentacao.ENTRADA);
 		em.merge(movimentacao);

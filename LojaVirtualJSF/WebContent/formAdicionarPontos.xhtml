@@ -24,20 +24,8 @@
 				<h:inputText id="cpf" value="#{adicionarPontosUC.cpf}"
 					label="#{msg.cpf}" required="true" />
 				<h:message for="cpf" styleClass="erro" />
-
-				<h:outputLabel value="#{msg.loginLoja}:" />
-				<h:inputText id="login" value="#{adicionarPontosUC.login}"
-					label="#{msg.loginLoja}" required="true" />
-				<h:message for="login" styleClass="erro" />
 				
-				<h:outputLabel value="#{msg.senhaLoja}:" />
-				<h:inputText id="senha" value="#{adicionarPontosUC.senha}"
-					label="#{msg.senhaLoja}" required="true" />
-				<h:message for="senha" styleClass="erro" />
-
 			</h:panelGrid>
-			<h:commandButton value="#{msg.logar}"
-				action="#{adicionarPontosUC.logar}" immediate="true" />
 			<h:commandButton value="#{msg.salvar}"
 				action="#{adicionarPontosUC.salvar}" />
 			<h:commandButton value="#{msg.cancelar}"
