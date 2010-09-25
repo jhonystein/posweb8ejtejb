@@ -11,8 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -22,7 +20,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="movimentacoes")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @NamedQuery(name="movimentacaoCliente", query="select m from Movimentacao as m where m.cliente.codigo = ?1 ")
 //@NamedQuery(name="clientePorCPF", query="select c from Cliente as c where c.cpf = ?1 ")
 @Stateful

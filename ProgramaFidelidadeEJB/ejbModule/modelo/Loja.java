@@ -8,14 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="lojas")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @NamedQuery(name="carregarLoja", query="select l from Loja as l where l.nick = ?1 and l.senha = ?2 ")
 @Stateful
 public class Loja implements Serializable{
