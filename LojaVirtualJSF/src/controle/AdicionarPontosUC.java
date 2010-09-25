@@ -1,11 +1,10 @@
 package controle;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+
 import remote.GerenciadorPontosRemote;
 
 @SessionScoped

@@ -35,16 +35,17 @@ public class ExtratoPontosUC{
 		Cliente cliente = (Cliente) q.getSingleResult();
 		if(cliente != null){
 			if(controleCliente.getUsuarioLogado(cliente.getCodigo()))
-				throw new Exception();//usuario ja logado
+				throw new Exception("Usuario ja logado");
 			else{//adiciona o cliente a lista
 				controleCliente.addCliente(cliente.getCodigo());
 				return cliente.getCodigo();
 			}
 		}else
-			throw new Exception();//usuario inexistente
+			throw new Exception("Usuario inexistente");
 	}
 
 	@WebMethod
+	@SuppressWarnings("unchecked")
 	public List<Movimentacao> extratoPontos(@WebParam(name="codigoCliente") int codigoCliente) throws Exception {
 		if(!controleCliente.getUsuarioLogado(codigoCliente))
 			throw new Exception();
@@ -56,13 +57,12 @@ public class ExtratoPontosUC{
 	@WebMethod
 	public void gastarPontos(@WebParam(name="codigoCliente") int codigoCliente, @WebParam(name="codigoProduto") int codigoProduto) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@WebMethod
 	public void logout(@WebParam(name="codigoCliente") int codigoCliente) throws Exception {
 		if(!controleCliente.removerCliente(codigoCliente))
-			throw new Exception();//usuario nao esta logado
+			throw new Exception("Usuario nao esta logado");
 	}
 	
 	@Schedule(dayOfMonth="10", hour="11")
@@ -72,6 +72,7 @@ public class ExtratoPontosUC{
 		Query q = em.createNamedQuery("clienteUltimaTroca");
 		q.setParameter(1, data.getTime());
 		
+		@SuppressWarnings("unchecked")
 		List<Object[]> listaObjetos = q.getResultList();
 		for(Object[] o: listaObjetos){
 			int saldoPonto = (Integer)o[1];
@@ -82,7 +83,7 @@ public class ExtratoPontosUC{
 				Movimentacao movimentacao = new Movimentacao();
 				movimentacao.setCliente((Cliente)o[0]);
 				movimentacao.setData(new Date());
-				movimentacao.setHistorico("");//acrescentar o texto para historico mais tarde
+				movimentacao.setHistorico("Acrescentar o texto para historico mais tarde");
 				movimentacao.setPonto(totalDescontar);
 				movimentacao.setTipo(TipoMovimentacao.SAIDA);
 				em.persist(movimentacao);

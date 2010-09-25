@@ -18,6 +18,7 @@ public class ProdutosUC{
 	private EntityManager em;
 
 	@WebMethod
+	@SuppressWarnings("unchecked")
 	public List<Produto> listar() {
 		return em.createQuery("select p from Produto p ").getResultList();
 	}

@@ -2,11 +2,11 @@ package controle;
 
 import java.util.Date;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import modelo.Cliente;
 import modelo.Loja;
 import modelo.Movimentacao;
@@ -16,14 +16,11 @@ import remote.GerenciadorPontosRemote;
 @Stateful
 public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 
-	@EJB
 	private Movimentacao movimentacao;
+	private Loja loja;
 	
 	@PersistenceContext
 	private EntityManager em;
-	
-	@EJB
-	private Loja loja;
 	
 	@Override
 	public boolean existeUsuario(String cpf) {
