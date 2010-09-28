@@ -1,8 +1,11 @@
 package controle;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -13,6 +16,7 @@ import javax.persistence.Query;
 
 import modelo.Cliente;
 import modelo.Movimentacao;
+import modelo.TipoMovimentacao;
 
 @WebService
 @Stateless
@@ -63,4 +67,32 @@ public class ExtratoPontosUC{
 			throw new Exception("Usuario nao esta logado");
 	}
 	
+	@Schedule(dayOfMonth="10", hour="11", minute="00", second="00")
+	public void descontarPontosMes(){
+		Calendar data = Calendar.getInstance();
+		data.add(Calendar.MONTH, -2);
+		Query q = em.createNamedQuery("clienteUltimaTroca");
+		q.setParameter(1, data.getTime());
+		
+		@SuppressWarnings("unchecked")
+		List<Cliente> listaClientes = q.getResultList();
+		for(Cliente cliente: listaClientes){
+			int totalDescontar = 100;
+			if(cliente.getSaldo() < 100)
+				totalDescontar = cliente.getSaldo();
+			if(totalDescontar > 0){
+				cliente.setSaldo(cliente.getSaldo()-totalDescontar);
+				Movimentacao movimentacao = new Movimentacao();
+				movimentacao.setCliente(cliente);
+				movimentacao.setData(new Date());
+				movimentacao.setHistorico("Desconto da pontuacao(Mais de 2 meses sem movimentacao)");
+				movimentacao.setPonto(totalDescontar);
+				movimentacao.setTipo(TipoMovimentacao.SAIDA);				
+				em.persist(movimentacao);
+				em.flush();
+			}
+		}
+		
+	}
+
 }
