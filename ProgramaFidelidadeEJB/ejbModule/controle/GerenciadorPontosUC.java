@@ -13,7 +13,6 @@ import javax.persistence.Query;
 import modelo.Cliente;
 import modelo.Loja;
 import modelo.Movimentacao;
-import modelo.Produto;
 import modelo.TipoMovimentacao;
 import remote.GerenciadorPontosRemote;
 
@@ -67,27 +66,6 @@ public class GerenciadorPontosUC implements GerenciadorPontosRemote{
 		em.merge(movimentacao);
 		em.flush();
 		
-	}
-
-	public void gastarPontos(int codigoCliente, int codigoProduto, int quantidade) throws Exception {
-		Cliente cliente = em.find(Cliente.class, codigoCliente);
-		Produto produto = em.find(Produto.class, codigoProduto);
-		if(cliente.getSaldo() - (quantidade* produto.getPontos()) < 0)
-			throw new Exception("O saldo nao pode ser menor que zero");
-		
-		cliente.setSaldo(cliente.getSaldo() - (quantidade* produto.getPontos()));
-		cliente.setUltimaSaida(new Date());
-		
-		movimentacao = new Movimentacao();
-		movimentacao.setCliente(cliente);
-		movimentacao.setData(new Date());
-		movimentacao.setHistorico("Troca de produto(s)");
-		movimentacao.setPonto(produto.getPontos() * quantidade);
-		movimentacao.setProduto(produto);
-		movimentacao.setTipo(TipoMovimentacao.SAIDA);
-		
-		em.persist(movimentacao);
-		em.flush();		
 	}
 
 }

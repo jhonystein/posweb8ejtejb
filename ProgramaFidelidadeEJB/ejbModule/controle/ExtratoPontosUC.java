@@ -16,6 +16,7 @@ import javax.persistence.Query;
 
 import modelo.Cliente;
 import modelo.Movimentacao;
+import modelo.Produto;
 import modelo.TipoMovimentacao;
 
 @WebService
@@ -26,8 +27,6 @@ public class ExtratoPontosUC{
 	private EntityManager em;
 	@EJB
 	private ControleCliente controleCliente;
-	@EJB
-	private GerenciadorPontosUC gerenciadorPontos;
 		
 	@WebMethod
 	public int login(@WebParam(name="cpf") String cpf, @WebParam(name="senha") String senha) throws Exception {
@@ -55,10 +54,27 @@ public class ExtratoPontosUC{
 		q.setParameter(1, codigoCliente);
 		return q.getResultList();
 	}
-
+	
 	@WebMethod
 	public void gastarPontos(@WebParam(name="codigoCliente") int codigoCliente, @WebParam(name="codigoProduto") int codigoProduto, @WebParam(name="qtdProduto") int qtdProduto) throws Exception {
-		gerenciadorPontos.gastarPontos(codigoCliente, codigoProduto, qtdProduto);
+		Cliente cliente = em.find(Cliente.class, codigoCliente);
+		Produto produto = em.find(Produto.class, codigoProduto);
+		if(cliente.getSaldo() - (qtdProduto* produto.getPontos()) < 0)
+			throw new Exception("O saldo nao pode ser menor que zero");
+		
+		cliente.setSaldo(cliente.getSaldo() - (qtdProduto* produto.getPontos()));
+		cliente.setUltimaSaida(new Date());
+		
+		Movimentacao movimentacao = new Movimentacao();
+		movimentacao.setCliente(cliente);
+		movimentacao.setData(new Date());
+		movimentacao.setHistorico("Troca de produto(s)");
+		movimentacao.setPonto(produto.getPontos() * qtdProduto);
+		movimentacao.setProduto(produto);
+		movimentacao.setTipo(TipoMovimentacao.SAIDA);
+		
+		em.persist(movimentacao);
+		em.flush();
 	}
 
 	@WebMethod
@@ -67,7 +83,7 @@ public class ExtratoPontosUC{
 			throw new Exception("Usuario nao esta logado");
 	}
 	
-	@Schedule(dayOfMonth="10", hour="11", minute="00", second="00")
+	@Schedule(dayOfMonth="10", hour="11")
 	public void descontarPontosMes(){
 		Calendar data = Calendar.getInstance();
 		data.add(Calendar.MONTH, -2);
