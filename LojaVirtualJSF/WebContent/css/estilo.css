@@ -1,0 +1,91 @@
+@CHARSET "ISO-8859-1";
+
+*html ul li {
+		float:left;
+		height:1%;
+		}
+*html ul li a{
+		height:1%;
+		}
+
+/* Fix IE. Hide from IE Mac \*/
+* html ul#menubv  li { float: left; height: 1%; }
+* html ul#menubv  li a { height: 1%; }
+/* End */
+
+body {
+	/*background-color: #F1FFC1;*/
+	color: #000;
+	color:  #CD0000;
+}
+
+input { 
+	background-color: #FFFFFF; 
+	color:  #CD0000;
+	border: 1px solid  #CD0000;
+	margin: 5px;
+}
+
+
+#site {
+	width: 800px;
+	border: 1px solid  #CD0000;
+	background-color: #FFFAFA;
+	float:left;
+}
+
+#rodape {
+	width: 780px;
+	float: left;
+	border-top: 1px solid  #CD0000;
+	height: 40px;
+	padding: 10px;
+}
+
+#corpo{
+	width: 608px;
+	float:left;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#login{
+	width:300px;
+	margin: 0 auto;
+	background-color:#F8F8F8;
+	border-left:1px solid #DFDFDF;
+	border-right:1px solid #DFDFDF;
+}
+
+
+.erro {
+	font-size: 14px;
+	color: red;
+	border-bottom: 1px red dotted;
+	font-weight: bold;
+}
+
+.erroGeral {
+	font-size: 14px;
+	color: red;
+	border-top: 1px red dotted;
+	border-bottom: 1px red dotted;
+	font-weight: bold;	
+}
+
+/* Links */
+	
+a {
+  padding: 5px 5px 5px 0.5em;
+  font-weight:bold;
+  color:  #CD0000;
+  text-decoration: none;
+}
+
+a, a:HOVER, a:VISITED {
+	margin: 5px;
+}
+a:hover {
+	text-decoration: underline;
+}
