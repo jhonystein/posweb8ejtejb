@@ -46,6 +46,7 @@ public class ExtratoUC {
 			ExtratoPontosUCService service = new ExtratoPontosUCServiceLocator();
 			ExtratoPontosUC proxy = service.getExtratoPontosUCPort();
 			proxy.logout(idSessao);
+			idSessao = null;
 		} catch (RemoteException e) {
 			FacesContext.getCurrentInstance().addMessage("login",
 					new FacesMessage("Sessão inválida!"));
@@ -63,6 +64,7 @@ public class ExtratoUC {
 			ExtratoPontosUCService service = new ExtratoPontosUCServiceLocator();
 			ExtratoPontosUC proxy = service.getExtratoPontosUCPort();
 			idSessao = proxy.login(login, senha);
+			updateMovimentacao();
 		} catch (RemoteException e) {
 			FacesContext.getCurrentInstance().addMessage("login",
 					new FacesMessage("Usuário/Senha inválidos!"));
@@ -76,6 +78,15 @@ public class ExtratoUC {
 	}
 	
 	public List<Movimentacao> getMovimentacao() {
+		updateMovimentacao();
+		return movimentacao;
+	}
+	
+	public void setMovimentacao(List<Movimentacao> movimentacao) {
+		this.movimentacao = movimentacao;
+	}
+	
+	private void updateMovimentacao() {
 		try {
 			ExtratoPontosUCService service = new ExtratoPontosUCServiceLocator();
 			ExtratoPontosUC proxy = service.getExtratoPontosUCPort();
@@ -93,11 +104,6 @@ public class ExtratoUC {
 			FacesContext.getCurrentInstance().addMessage("login",
 					new FacesMessage("Problemas com o acesso ao servidor!"));
 		}
-		return movimentacao;
-	}
-	
-	public void setMovimentacao(List<Movimentacao> movimentacao) {
-		this.movimentacao = movimentacao;
 	}
 	
 }

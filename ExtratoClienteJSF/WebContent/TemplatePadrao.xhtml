@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>#{titulo}</title>
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/css/estilo.css"
+		rel="stylesheet" type="text/css" />
+</h:head>
+<h:body styleClass="corpo">
+	<f:view>
+		<f:loadBundle basename="messages" var="msg" />
+		<div id="site">
+            <div style="float: left; width: 25%;">
+                <h:link outcome="listProdutos" value="Trocar Pontos"/>
+                <br/>
+                <h:link outcome="listPontos" value="Extrato"/>
+                <br/>
+                <h:form>
+                	<h:commandButton value="#{msg.logout}" action="#{extratoUC.logout}" immediate="true" />
+                </h:form>
+            </div>
+			<div id="corpo" style="float: left; width: 75%;">
+				<h1>#{titulo}</h1>
+				<ui:insert name="corpo" />
+			</div>
+			<div id="rodape">
+				<ui:insert name="rodape" /> 
+				<h:outputText value="Trabalho de EJB" /><br />
+				<h:outputText value="Equipe: Emerson, Jhony e Tiago" />
+			</div>
+		</div>
+	</f:view>
+</h:body>
+</html>

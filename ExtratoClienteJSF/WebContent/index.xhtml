@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Extrato Cliente</title>
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/css/estilo.css"
+		rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<f:view>
+		<f:loadBundle basename="messages" var="msg" />
+		<div id="login">
+		<fieldset><legend>#{msg.login}:</legend> <h:form>
+			<h:messages styleClass="erroGeral"></h:messages>
+			<h:panelGrid columns="3">
+				<h:outputLabel value="#{msg.loginCliente}:" />
+				<h:inputText id="login" value="#{extratoUC.login}"
+					label="#{msg.loginCliente}" required="true" />
+				<h:message for="login" styleClass="erro" />
+
+				<h:outputLabel value="#{msg.senhaCliente}:" />
+				<h:inputSecret id="senha" value="#{extratoUC.senha}"
+					label="#{msg.senhaCliente}" required="true" />
+				<h:message for="senha" styleClass="erro" />
+
+			</h:panelGrid>
+			<h:commandButton value="#{msg.logar}" action="#{extratoUC.logar}" />
+
+		</h:form></fieldset>
+		</div>
+	</f:view>
+</h:body>
+</html>

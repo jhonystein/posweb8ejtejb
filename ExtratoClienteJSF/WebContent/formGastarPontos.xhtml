@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="TemplatePadrao.xhtml">
+	<ui:param name="titulo" value="#{msg.adicionarPontos}" />
+	<ui:define name="corpo">
+		<h:form>
+			<h:messages styleClass="erroGeral"></h:messages>
+			<h:panelGrid columns="3">
+
+				<h:outputLabel value="#{msg.produtos}:" />
+				<h:selectManyCheckbox value="#{adicionarPontosUC.produtos}"
+					id="produtos">
+					<f:selectItem itemLabel="Banana" itemValue="3" />
+					<f:selectItem itemLabel="Laranja" itemValue="10" />
+					<f:selectItem itemLabel="Abacaxi" itemValue="17" />
+				</h:selectManyCheckbox>
+				<h:message for="produtos" styleClass="erro" />
+
+				<h:outputLabel value="#{msg.cpf}:" />
+				<h:inputText id="cpf" value="#{adicionarPontosUC.cpf}"
+					label="#{msg.cpf}" required="true" />
+				<h:message for="cpf" styleClass="erro" />
+				
+			</h:panelGrid>
+			<h:commandButton value="#{msg.salvar}"
+				action="#{adicionarPontosUC.salvar}" />
+			<h:commandButton value="#{msg.cancelar}"
+				action="#{adicionarPontosUC.cancelar}" immediate="true" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
