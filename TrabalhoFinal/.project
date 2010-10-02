@@ -5,6 +5,7 @@
 	<projects>
 		<project>ProgramaFidelidadeEJB</project>
 		<project>LojaVirtualJSF</project>
+		<project>ExtratoClienteJSF</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

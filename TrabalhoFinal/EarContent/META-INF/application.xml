@@ -10,4 +10,10 @@
       <context-root>LojaVirtualJSF</context-root>
     </web>
   </module>
+  <module>
+    <web>
+      <web-uri>ExtratoClienteJSF.war</web-uri>
+      <context-root>ExtratoClienteJSF</context-root>
+    </web>
+  </module>
 </application>
