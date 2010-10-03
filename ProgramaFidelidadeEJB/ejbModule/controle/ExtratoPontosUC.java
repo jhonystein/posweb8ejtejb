@@ -78,6 +78,11 @@ public class ExtratoPontosUC{
 	}
 
 	@WebMethod
+	public Cliente dadosCliente(@WebParam(name="codigoCliente") int codigoCliente) {
+		return em.find(Cliente.class, codigoCliente);
+	}
+	
+	@WebMethod
 	public void logout(@WebParam(name="codigoCliente") int codigoCliente) throws Exception {
 		if(!controleCliente.removerCliente(codigoCliente))
 			throw new Exception("Usuario nao esta logado");

@@ -14,7 +14,9 @@
 					<f:facet name="header">
 						<h:outputText value="#{msg.colunaDescricao}" />
 					</f:facet>
-					<h:outputText value="#{pro.descricao}" />
+					<h:commandLink action="#{gastarPontosUC.selecione}">
+						<h:outputText value="#{pro.descricao}" />
+					</h:commandLink>
 				</h:column>
 				<h:column>
 					<f:facet name="header">

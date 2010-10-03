@@ -108,4 +108,7 @@ public class ExtratoUC {
 		}
 	}
 	
+	public Integer getIdSessao() {
+		return idSessao;
+	}
 }

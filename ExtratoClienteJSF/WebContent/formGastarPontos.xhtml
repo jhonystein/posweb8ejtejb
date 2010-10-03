@@ -5,31 +5,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="TemplatePadrao.xhtml">
-	<ui:param name="titulo" value="#{msg.adicionarPontos}" />
+	<ui:param name="titulo" value="#{msg.gastarPontos}" />
 	<ui:define name="corpo">
 		<h:form>
 			<h:messages styleClass="erroGeral"></h:messages>
 			<h:panelGrid columns="3">
-
-				<h:outputLabel value="#{msg.produtos}:" />
-				<h:selectManyCheckbox value="#{adicionarPontosUC.produtos}"
-					id="produtos">
-					<f:selectItem itemLabel="Banana" itemValue="3" />
-					<f:selectItem itemLabel="Laranja" itemValue="10" />
-					<f:selectItem itemLabel="Abacaxi" itemValue="17" />
-				</h:selectManyCheckbox>
-				<h:message for="produtos" styleClass="erro" />
-
-				<h:outputLabel value="#{msg.cpf}:" />
-				<h:inputText id="cpf" value="#{adicionarPontosUC.cpf}"
-					label="#{msg.cpf}" required="true" />
-				<h:message for="cpf" styleClass="erro" />
+			
+				<h:inputHidden value="#{gastarPontosUC.idSessao}"/>
 				
+				<h:outputLabel value="#{msg.produto}:" />
+				<h:inputText id="descricao" value="#{gastarPontosUC.produtoSelecionado.descricao}"
+					required="true" readonly="true" />
+				<h:message for="produto" styleClass="erro" />
+
+				<h:outputLabel value="#{msg.quantidade}:" />
+				<h:inputText id="quantidade" value="#{gastarPontosUC.qtdade}"
+					required="true"/>
+				<h:message for="quantidade" styleClass="erro" />
+
 			</h:panelGrid>
-			<h:commandButton value="#{msg.salvar}"
-				action="#{adicionarPontosUC.salvar}" />
+			<h:commandButton value="#{msg.gastarPontos}"
+				action="#{gastarPontosUC.gastarPontos}" />
 			<h:commandButton value="#{msg.cancelar}"
-				action="#{adicionarPontosUC.cancelar}" immediate="true" />
+				action="#{gastarPontosUC.cancelar}" immediate="true" />
 		</h:form>
 	</ui:define>
 </ui:composition>

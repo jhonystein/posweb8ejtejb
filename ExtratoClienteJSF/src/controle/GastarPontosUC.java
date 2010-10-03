@@ -11,6 +11,9 @@ import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
+import remote.ExtratoPontosUC;
+import remote.ExtratoPontosUCService;
+import remote.ExtratoPontosUCServiceLocator;
 import remote.Produto;
 import remote.ProdutosUC;
 import remote.ProdutosUCService;
@@ -22,7 +25,10 @@ public class GastarPontosUC {
 	
 	private List<Produto> produtos;
     private UIData selec;
-
+    private Produto produtoSelecionado;
+    private Integer qtdade;
+	private Integer idSessao;
+    
 	public GastarPontosUC() {
 		try {
 			ProdutosUCService service = new ProdutosUCServiceLocator();
@@ -59,4 +65,51 @@ public class GastarPontosUC {
         this.selec = selec;
     }
 
+    public String selecione(){
+        produtoSelecionado = (Produto)selec.getRowData();
+        return "formGastarPontos";
+    }
+
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
+
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+
+	public void setQtdade(Integer qtdade) {
+		this.qtdade = qtdade;
+	}
+
+	public Integer getQtdade() {
+		return qtdade;
+	}
+
+	public String gastarPontos() {
+		try {
+			ExtratoPontosUCService service = new ExtratoPontosUCServiceLocator();
+			ExtratoPontosUC proxy = service.getExtratoPontosUCPort();
+			ExtratoUC extrato = (ExtratoUC)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("extratoUC");
+			proxy.gastarPontos(extrato.getIdSessao(), produtoSelecionado.getCodigo(), qtdade);
+		} catch (RemoteException e) {
+			FacesContext.getCurrentInstance().addMessage("produto",
+					new FacesMessage("Não foi possível gastar os pontos " + e.getMessage()));
+			return "formGastarPontos";
+		} catch (ServiceException e) {
+			FacesContext.getCurrentInstance().addMessage("login",
+					new FacesMessage("Problemas com o acesso ao servidor!"));
+			return "index";
+		}
+		return "listProdutos";
+	}
+
+	public void setIdSessao(Integer idSessao) {
+		this.idSessao = idSessao;
+	}
+
+	public Integer getIdSessao() {
+		return idSessao;
+	}
+	
 }
