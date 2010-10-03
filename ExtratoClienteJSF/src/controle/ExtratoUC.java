@@ -93,9 +93,11 @@ public class ExtratoUC {
 			
 			Movimentacao[] arrMovimentacao = proxy.extratoPontos(idSessao);
 			
-			movimentacao = new ArrayList<Movimentacao>(arrMovimentacao.length);
-			for (Movimentacao movimento : arrMovimentacao) {
-				movimentacao.add(movimento);
+			movimentacao = new ArrayList<Movimentacao>();
+			if (arrMovimentacao != null) {
+				for (Movimentacao movimento : arrMovimentacao) {
+					movimentacao.add(movimento);
+				}
 			}
 		} catch (RemoteException e) {
 			FacesContext.getCurrentInstance().addMessage("login",
